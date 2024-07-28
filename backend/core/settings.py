@@ -1,15 +1,25 @@
 from datetime import timedelta
 from pathlib import Path
-import os
+import os, dj_database_url, environ
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
+env = environ.Env()
+
+environ.Env.read_env()
+
+
+
+
+
 SECRET_KEY = 'django-insecure-e_hktos(93n6y(n%jv@-3il9pzr17-o81m3y)e)r0jnps(tgh%'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -72,15 +82,19 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my_db',
-        'USER': 'my_dbuser', 
-        'PASSWORD': '1',
-        'HOST': 'localhost',  
-        'PORT': '5432',           
-    }
+    'default': dj_database_url.parse(env('DATABASE_URL'))
 }
+ 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'my_db_ex9n',
+#         'USER': 'my_dbuser', 
+#         'PASSWORD': '92qf7sTW058qJlSi8qCMImrfrtTbMCfL',
+#         'HOST': 'dpg-cqj7o0uehbks73c7eang-a',  
+#         'PORT': '5432',           
+#     }
+# }
 
 LOGGING = {
     'version': 1,
